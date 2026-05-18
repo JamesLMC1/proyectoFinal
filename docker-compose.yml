@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ./pokedex-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./pokedex-backend/.env
+
+  frontend:
+    build:
+      context: ./ExpoTutorial
+      args:
+        EXPO_PUBLIC_API_URL: http://localhost:3000/api
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
