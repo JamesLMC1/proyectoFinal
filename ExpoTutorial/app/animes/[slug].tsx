@@ -45,7 +45,7 @@ export default function AnimeScreen() {
         }
         Alert.alert("Eliminado", `Personaje "${p.nombre}" eliminado`);
         if (personaje?.id === p.id) setPersonaje(slug, null as any);
-        setListaPersonajes((prev) => prev.filter((x) => x.id !== p.id));
+        listarPersonajes();
       } else {
         const animeId = id || slug;
         const res = await fetchWithAuth(`/animes/${animeId}`, { method: "DELETE" });

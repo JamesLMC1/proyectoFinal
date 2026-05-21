@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import { useAnime } from "@/context/AnimeContext";
 import { useAuth } from "@/context/AuthContext";
 import ModalImagenes from "@/components/ModalImagenes";
@@ -22,9 +22,11 @@ export default function InformacionScreen() {
   const [mostrarCrearAnime, setMostrarCrearAnime] = useState(false);
   const [mostrarModalImg, setMostrarModalImg] = useState(false);
 
-  useEffect(() => {
-    cargarAnimes();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      cargarAnimes();
+    }, [])
+  );
 
   const cargarAnimes = async () => {
     try {

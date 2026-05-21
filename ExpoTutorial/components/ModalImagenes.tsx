@@ -1,4 +1,6 @@
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image } from "expo-image";
 import { colors, sharedStyles } from "@/theme";
 
 interface ModalImagenesProps {
@@ -9,6 +11,11 @@ interface ModalImagenesProps {
 
 export default function ModalImagenes({ visible, imagenes, onClose }: ModalImagenesProps) {
   const total = imagenes.length;
+  const [errores, setErrores] = useState<Set<number>>(new Set());
+
+  const handleImageError = (index: number) => {
+    setErrores(prev => new Set(prev).add(index));
+  };
 
   return (
     <Modal
@@ -42,11 +49,19 @@ export default function ModalImagenes({ visible, imagenes, onClose }: ModalImage
               <View style={styles.grid}>
                 {imagenes.map((url, i) => (
                   <View key={i} style={styles.imageSlot}>
-                    <Image
-                      source={{ uri: url }}
-                      style={styles.image}
-                      resizeMode="contain"
-                    />
+                    {errores.has(i) ? (
+                      <View style={styles.errorContainer}>
+                        <Text style={styles.errorText}>Error al cargar</Text>
+                      </View>
+                    ) : (
+                      <Image
+                        source={{ uri: url }}
+                        style={styles.image}
+                        contentFit="contain"
+                        transition={300}
+                        onError={() => handleImageError(i)}
+                      />
+                    )}
                     <Text style={styles.imageLabel}>Imagen {i + 1}</Text>
                   </View>
                 ))}
@@ -105,6 +120,20 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 12,
     marginTop: 8,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  errorContainer: {
+    width: "100%",
+    height: 150,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.surface,
+    borderRadius: 8,
+  },
+  errorText: {
+    color: colors.danger,
+    fontSize: 12,
     fontWeight: "600",
     textAlign: "center",
   },

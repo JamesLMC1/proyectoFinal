@@ -12,7 +12,17 @@ const animeRoutes = require('./src/routes/animes');
 const { legacyRouter, crudRouter } = require('./src/routes/personajes');
 
 const app = express();
-app.use(cors({ origin: '*' }));
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+}));
+
+
+app.options('*', cors());
 app.use(express.json({ limit: '50mb' }));
 
 const swaggerOptions = {
