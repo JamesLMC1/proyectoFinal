@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { Image } from "expo-image";
+import { ActivityIndicator, Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { colors, sharedStyles } from "@/theme";
 
 interface ModalImagenesProps {
@@ -24,7 +23,7 @@ export default function ModalImagenes({ visible, imagenes, onClose }: ModalImage
       animationType="fade"
       onRequestClose={onClose}
     >
-      <Pressable style={sharedStyles.backdrop} onPress={onClose}>
+      <Pressable style={sharedStyles.backdrop} onPress={onClose} collapsable={false}>
         <View
           style={sharedStyles.modalContainer}
           onStartShouldSetResponder={() => true}
@@ -37,7 +36,6 @@ export default function ModalImagenes({ visible, imagenes, onClose }: ModalImage
           </View>
 
           <ScrollView
-            style={styles.scrollView}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
@@ -57,8 +55,7 @@ export default function ModalImagenes({ visible, imagenes, onClose }: ModalImage
                       <Image
                         source={{ uri: url }}
                         style={styles.image}
-                        contentFit="contain"
-                        transition={300}
+                        resizeMode="contain"
                         onError={() => handleImageError(i)}
                       />
                     )}
@@ -75,9 +72,6 @@ export default function ModalImagenes({ visible, imagenes, onClose }: ModalImage
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
-    flex: 1,
-  },
   scrollContent: {
     padding: 16,
     paddingBottom: 32,

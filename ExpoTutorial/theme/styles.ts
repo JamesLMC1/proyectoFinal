@@ -136,6 +136,7 @@ export const sharedStyles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   modalContainer: {
+    flex: 1,
     width: "100%",
     maxWidth: 500,
     maxHeight: "90%",

@@ -9,7 +9,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
 } from "react-native";
 
 interface Props {
@@ -25,7 +25,6 @@ export default function CrearAnimeModal({
 }: Props) {
   const { fetchWithAuth } = useAuth();
   const [nombre, setNombre] = useState("");
-  const [descripcion, setDescripcion] = useState("");
   const [enviando, setEnviando] = useState(false);
 
   const crear = async () => {
@@ -40,7 +39,6 @@ export default function CrearAnimeModal({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nombre: nombre.trim(),
-          ...(descripcion.trim() && { descripcion: descripcion.trim() }),
         }),
       });
       const data = await res.json();
@@ -50,7 +48,6 @@ export default function CrearAnimeModal({
       Alert.alert("Éxito", `Anime "${nombre}" creado correctamente`);
       onCreated?.(animeId, slug, nombre.trim());
       setNombre("");
-      setDescripcion("");
       onClose();
     } catch (e: any) {
       Alert.alert("Error", e.message);
@@ -104,18 +101,6 @@ export default function CrearAnimeModal({
               placeholder="Ej: Naruto"
               placeholderTextColor={colors.textMuted}
             />
-
-            <Text style={sharedStyles.label}>Descripción</Text>
-            <TextInput
-              style={[styles.input, styles.textArea]}
-              value={descripcion}
-              onChangeText={setDescripcion}
-              placeholder="Descripción del anime..."
-              placeholderTextColor={colors.textMuted}
-              multiline
-              numberOfLines={3}
-            />
-
             <Pressable
               style={[sharedStyles.button, { backgroundColor: colors.primary }]}
               onPress={crear}

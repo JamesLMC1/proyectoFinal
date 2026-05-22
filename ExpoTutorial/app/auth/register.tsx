@@ -29,7 +29,7 @@ export default function RegisterScreen() {
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <View style={styles.accentBar} />
-        <Text style={styles.title}>STICKERSMASH</Text>
+        <Text style={styles.title}>APIANIMES</Text>
         <Text style={styles.subtitle}>Crear Cuenta</Text>
       </View>
 

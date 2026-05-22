@@ -28,7 +28,7 @@ export default function LoginScreen() {
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <View style={styles.accentBar} />
-        <Text style={styles.title}>STICKERSMASH</Text>
+        <Text style={styles.title}>APIANIMES</Text>
         <Text style={styles.subtitle}>Iniciar Sesión</Text>
       </View>
 

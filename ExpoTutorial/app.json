@@ -51,6 +51,12 @@
         "projectId": "9cf13f8b-7e3a-4292-aa5a-0afcdf8e66c7"
       }
     },
-    "owner": "james192"
+    "owner": "james192",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/9cf13f8b-7e3a-4292-aa5a-0afcdf8e66c7"
+    }
   }
 }
