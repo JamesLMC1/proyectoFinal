@@ -43,7 +43,7 @@ export default function CrearAnimeModal({
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Error al crear anime");
-      const slug = nombre.trim().toLowerCase().replace(/\s+/g, "-");
+      const slug = data.slug;
       const animeId = data.id || data.anime?.id || slug;
       Alert.alert("Éxito", `Anime "${nombre}" creado correctamente`);
       onCreated?.(animeId, slug, nombre.trim());

@@ -38,7 +38,7 @@ export default function InformacionScreen() {
       const data = await res.json();
       const lista: AnimeEntry[] = (Array.isArray(data) ? data : []).map((a: any, i: number) => ({
         id: a.id,
-        slug: a.nombre?.toLowerCase().replace(/\s+/g, "-") || a.slug || `anime-${i}`,
+        slug: a.slug || a.nombre?.toLowerCase().replace(/\s+/g, "-") || `anime-${i}`,
         label: a.nombre || a.label || `Anime ${i + 1}`,
       }));
       setAnimes(lista);

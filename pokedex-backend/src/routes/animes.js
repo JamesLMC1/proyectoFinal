@@ -2,6 +2,7 @@ const { Router } = require('express');
 const supabase = require('../supabase');
 const requireAuth = require('../middleware/auth');
 const { uploadBase64 } = require('../utils/upload');
+const { toSlug } = require('../utils/slug');
 
 const router = Router();
 
@@ -187,10 +188,7 @@ router.post('/', requireAuth, async (req, res) => {
     return res.status(400).json({ error: 'El nombre del anime es requerido' });
   }
 
-  const slug = nombre
-    .toLowerCase()
-    .replace(/[^\w\s]/g, '')
-    .replace(/\s+/g, '-');
+  const slug = toSlug(nombre);
 
   let imageUrls = [];
 
@@ -285,10 +283,7 @@ router.put('/:id', requireAuth, async (req, res) => {
   const updates = {};
   if (nombre) {
     updates.nombre = nombre;
-    updates.slug = nombre
-      .toLowerCase()
-      .replace(/[^\w\s]/g, '')
-      .replace(/\s+/g, '-');
+    updates.slug = toSlug(nombre);
   }
   if (descripcion !== undefined) updates.descripcion = descripcion;
 
