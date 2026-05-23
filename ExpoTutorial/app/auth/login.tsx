@@ -27,13 +27,12 @@ export default function LoginScreen() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <View style={styles.accentBar} />
         <Text style={styles.title}>APIANIMES</Text>
         <Text style={styles.subtitle}>Iniciar Sesión</Text>
       </View>
 
       <View style={styles.form}>
-        <Text style={sharedStyles.label}>Email</Text>
+        <Text style={styles.inputLabel}>Email</Text>
         <TextInput
           style={styles.input}
           value={email}
@@ -44,7 +43,7 @@ export default function LoginScreen() {
           autoCapitalize="none"
         />
 
-        <Text style={sharedStyles.label}>Contraseña</Text>
+        <Text style={styles.inputLabel}>Contraseña</Text>
         <TextInput
           style={styles.input}
           value={password}
@@ -60,23 +59,15 @@ export default function LoginScreen() {
           </View>
         )}
 
-        <View style={styles.fallbackBox}>
-          <Text style={styles.fallbackTitle}>⚠️ ¿Problemas para iniciar sesión?</Text>
-          <Text style={styles.fallbackText}>
-            Si el inicio de sesión falla, usa estas credenciales de prueba:
-          </Text>
-          <Text style={styles.fallbackCredentials}>
-            Email: admin1234@gmail.com{"\n"}Contraseña: 1234567
-          </Text>
-        </View>
-
-        <Pressable style={[sharedStyles.button, { backgroundColor: colors.primary }]} onPress={handleLogin} disabled={loading}>
-          <Text style={sharedStyles.buttonText}>{loading ? "Entrando..." : "Entrar"}</Text>
+        <Pressable style={styles.button} onPress={handleLogin} disabled={loading}>
+          <Text style={styles.buttonText}>{loading ? "Entrando..." : "Entrar"}</Text>
         </Pressable>
 
         <Link href="/auth/register" style={styles.link}>
           <Text style={styles.linkText}>¿No tienes cuenta? Regístrate</Text>
         </Link>
+
+        <Text style={styles.fallback}>Prueba: admin1234@gmail.com / 1234567</Text>
       </View>
     </ScrollView>
   );
@@ -87,75 +78,74 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: colors.bg,
     justifyContent: "center",
-    padding: 24,
+    paddingHorizontal: 32,
+    paddingVertical: 48,
   },
   header: {
     alignItems: "center",
-    marginBottom: 40,
-  },
-  accentBar: {
-    width: 50,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: colors.primary,
-    marginBottom: 20,
+    marginBottom: 56,
   },
   title: {
     color: colors.text,
-    fontSize: 32,
-    fontWeight: "900",
-    letterSpacing: 2,
+    fontSize: 34,
+    fontWeight: "800",
+    letterSpacing: 3,
   },
   subtitle: {
-    color: colors.textLight,
-    fontSize: 18,
-    marginTop: 8,
-    fontWeight: "600",
+    color: colors.textMuted,
+    fontSize: 16,
+    marginTop: 10,
+    fontWeight: "500",
   },
   form: {
     width: "100%",
+    maxWidth: 400,
+    alignSelf: "center",
+  },
+  inputLabel: {
+    color: colors.textLight,
+    fontSize: 13,
+    fontWeight: "600",
+    marginBottom: 8,
+    letterSpacing: 0.5,
   },
   input: {
     backgroundColor: colors.surface,
-    borderRadius: 12,
-    padding: 14,
+    borderRadius: 14,
+    paddingHorizontal: 18,
+    paddingVertical: 16,
     fontSize: 16,
     color: colors.text,
-    marginBottom: 16,
+    marginBottom: 20,
     borderWidth: 1,
-    borderColor: colors.border + "40",
+    borderColor: colors.border + "30",
   },
-  fallbackBox: {
-    backgroundColor: "#1E3A5F",
-    borderRadius: 12,
-    padding: 14,
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: colors.primary + "60",
+  button: {
+    backgroundColor: colors.primary,
+    borderRadius: 14,
+    paddingVertical: 16,
+    alignItems: "center",
+    marginTop: 8,
   },
-  fallbackTitle: {
-    color: colors.primary,
-    fontSize: 14,
-    fontWeight: "700",
-    marginBottom: 6,
-  },
-  fallbackText: {
-    color: colors.textLight,
-    fontSize: 13,
-    marginBottom: 6,
-  },
-  fallbackCredentials: {
+  buttonText: {
     color: colors.text,
-    fontSize: 13,
-    fontWeight: "600",
+    fontSize: 16,
+    fontWeight: "700",
+    letterSpacing: 1,
   },
   link: {
-    marginTop: 20,
+    marginTop: 24,
     alignItems: "center",
   },
   linkText: {
-    color: colors.primary,
+    color: colors.textMuted,
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: "500",
+  },
+  fallback: {
+    color: colors.textMuted + "80",
+    fontSize: 12,
+    textAlign: "center",
+    marginTop: 40,
   },
 });

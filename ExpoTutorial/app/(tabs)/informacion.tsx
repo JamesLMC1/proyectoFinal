@@ -161,23 +161,15 @@ export default function InformacionScreen() {
                 </Pressable>
               </View>
 
-              <View style={styles.modalBody}>
-                {animes.length === 0 && (
-                  <Text style={styles.emptyText}>Cargando animes...</Text>
-                )}
-                {animes.map((anime) => (
-                  <Pressable
-                    key={anime.slug}
-                    style={[styles.animeOption, { borderLeftColor: colors.primary }]}
-                    onPress={() => navegarA(anime)}
-                  >
-                    <Text style={[styles.animeOptionText, { color: colors.primary }]}>
-                      {anime.label}
-                    </Text>
-                    <Text style={styles.animeOptionArrow}>→</Text>
-                  </Pressable>
-                ))}
-              </View>
+<ScrollView style={{ flex: 1 }} contentContainerStyle={styles.modalBody} showsVerticalScrollIndicator={false}>
+            {animes.length === 0 && <Text style={styles.emptyText}>Cargando animes...</Text>}
+            {animes.map((anime) => (
+              <Pressable key={anime.slug} style={[styles.animeOption, { borderLeftColor: colors.primary }]} onPress={() => navegarA(anime)}>
+                <Text style={[styles.animeOptionText, { color: colors.primary }]}>{anime.label}</Text>
+                <Text style={styles.animeOptionArrow}>→</Text>
+              </Pressable>
+            ))}
+          </ScrollView>
             </View>
           </View>
         </Modal>
